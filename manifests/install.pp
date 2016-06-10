@@ -11,7 +11,7 @@ class zookeeper::install (
   }
 
 
-  tomcat::instance { 'exhibitor':
+  tomcat::instance { 'ROOT':
     install_from_source => true,
     source_url          => $source_url,
     catalina_base       => $exibitor_catalina_base,
