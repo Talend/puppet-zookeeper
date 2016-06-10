@@ -42,7 +42,28 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class zookeeper {
+class zookeeper (
+
+  $package_ensure = $zookeeper::params::package_ensure,
+  $service_ensure = $zookeeper::params::service_ensure,
+  $service_enable = $zookeeper::params::service_enable,
+
+) inherits zookeeper::params {
+
+
+
+  class { 'zookeeper::install': }
+  class { 'zookeeper::config': }
+  class { 'zookeeper::service': }
+
+  anchor { 'zookeeper::begin': }
+  anchor { 'zookeeper::end': }
+
+  Anchor['zookeeper::begin'] ->
+  Class['zookeeper::install'] ->
+  Class['zookeeper::config'] ~>
+  Class['zookeeper::service'] ->
+  Anchor['zookeeper::end']
 
 
 }

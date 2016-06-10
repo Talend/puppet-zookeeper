@@ -1,0 +1,1 @@
+class zookeeper::config {}
