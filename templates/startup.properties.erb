@@ -1,0 +1,6 @@
+zookeeper-data-directory=/var/lib/zookeeper/data
+zookeeper-install-directory=/usr/lib/zookeeper
+log-index-directory=/var/lib/zookeeper/data/log
+auto-manage-instances=1
+auto-manage-instances-fixed-ensemble-size=3
+backup-extra=throttle\=1048576&bucket-name\=backup-<%= @region %>-<%= @aws_account_id %>-talend-com&key-prefix\=<%= @vpc_id %>-exhibitor-backup&max-retries\=3&retry-sleep-ms\=1000

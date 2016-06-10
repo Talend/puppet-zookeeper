@@ -44,9 +44,11 @@
 #
 class zookeeper (
 
-  $package_ensure = $zookeeper::params::package_ensure,
-  $service_ensure = $zookeeper::params::service_ensure,
-  $service_enable = $zookeeper::params::service_enable,
+  $package_ensure           = $zookeeper::params::package_ensure,
+  $service_ensure           = $zookeeper::params::service_ensure,
+  $service_enable           = $zookeeper::params::service_enable,
+  $tomcat_version           = $zookeeper::params::tomcat_version,
+  $exhibitor_catalina_base  = $zookeeper::params::exhibitor_catalina_base,
 
 ) inherits zookeeper::params {
 

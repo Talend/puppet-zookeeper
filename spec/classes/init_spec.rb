@@ -21,7 +21,7 @@ describe 'zookeeper' do
 
       # Test if it compiles
       it { should compile }
-      it { should have_resource_count(5)}
+      it { should have_resource_count(27)}
 
 
 
@@ -30,14 +30,14 @@ describe 'zookeeper' do
       it {
         should contain_class('zookeeper')
         should contain_class('zookeeper::params')
-        should contain_class('zookeeper::install').with_package_ensure('present')
+        should contain_class('zookeeper::install').with_package_ensure('installed')
         should contain_class('zookeeper::config')
         should contain_class('zookeeper::service')
       }
 
       it {
         should contain_package('zookeeper')
-        should contain_package('exhibitor')
+        should contain_package('netflix-exhibitor-tomcat')
       }
 
 
