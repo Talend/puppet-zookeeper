@@ -1,7 +1,7 @@
 class zookeeper::install (
 
   $package_ensure         = $zookeeper::package_ensure,
-  $exhibitor_catalina_base = $zookeeper::$exhibitor_catalina_base,
+  $exhibitor_catalina_base = $zookeeper::exhibitor_catalina_base,
   $tomcat_version         = $zookeeper::tomcat_version,
 ){
 
