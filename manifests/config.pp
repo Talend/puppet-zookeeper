@@ -21,8 +21,8 @@ class zookeeper::config (
 
   #Directories added by zookeeper rpm that we remove to avoid confusion
   $unused_files = [
-    '/etc/init.d/zookeeper',
-    '/etc/zookeeper'
+    #'/etc/init.d/zookeeper',
+    #'/etc/zookeeper'
   ]
 
   file {
