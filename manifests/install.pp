@@ -10,6 +10,12 @@ class zookeeper::install (
     default => 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.2/bin/apache-tomcat-8.5.2.tar.gz'
   }
 
+  unless defined(File['/opt/tomcat']){
+    file{ '/opt/tomcat':
+      ensure => 'link',
+      target => $exibitor_catalina_base
+    }
+  }
 
   tomcat::instance { 'ROOT':
     install_from_source => true,
