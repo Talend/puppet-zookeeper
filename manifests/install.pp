@@ -28,6 +28,7 @@ class zookeeper::install (
     'zookeeper':
       ensure => $package_ensure;
     'netflix-exhibitor-tomcat':
-      ensure => $package_ensure;
+      ensure => $package_ensure,
+      require => File['/opt/tomcat'];
   }
 }

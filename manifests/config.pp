@@ -17,7 +17,6 @@ class zookeeper::config (
     '/usr/lib/zookeeper/conf',
     '/usr/lib/zookeeper',
     '/var/log/zookeeper',
-    '/opt/tomcat'
   ]
 
   #Directories added by zookeeper rpm that we remove to avoid confusion
