@@ -26,7 +26,8 @@ class zookeeper::config (
   ]
 
   file {
-    "${exhibitor_catalina_base}/webapps/ROOT/WEB-INF/classes/exhibitor.properties":
+    "${exhibitor_catalina_base}/webapps/exhibitor/WEB-INF/classes/exhibitor.properties":
+#                  /opt/tomcat/webapps/exhibitor/WEB-INF/classes/exhibitor.properties
       content => template('zookeeper/exhibitor.properties.erb'),
       owner   => 'tomcat',
       group   => 'tomcat';
