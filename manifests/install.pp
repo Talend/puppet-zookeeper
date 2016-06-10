@@ -1,7 +1,7 @@
 class zookeeper::install (
 
   $package_ensure         = $zookeeper::package_ensure,
-  $exibitor_catalina_base = $zookeeper::exibitor_catalina_base,
+  $exhibitor_catalina_base = $zookeeper::$exhibitor_catalina_base,
   $tomcat_version         = $zookeeper::tomcat_version,
 ){
 
@@ -13,14 +13,14 @@ class zookeeper::install (
   unless defined(File['/opt/tomcat']){
     file{ '/opt/tomcat':
       ensure => 'link',
-      target => $exibitor_catalina_base
+      target => $exhibitor_catalina_base
     }
   }
 
   tomcat::instance { 'ROOT':
     install_from_source => true,
     source_url          => $source_url,
-    catalina_base       => $exibitor_catalina_base,
+    catalina_base       => $exhibitor_catalina_base,
     java_home           => $::java_default_home,
   } ->
 
