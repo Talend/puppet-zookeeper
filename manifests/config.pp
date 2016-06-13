@@ -29,9 +29,6 @@ class zookeeper::config (
       ensure  => directory,
       owner   => 'tomcat',
       group   => 'tomcat';
-    $unused_files:
-      ensure => absent,
-      force  => true;
     '/etc/init.d/zookeeper':
       content => template('zookeeper/zookeeper.init.erb');
   }
