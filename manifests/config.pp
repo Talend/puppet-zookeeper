@@ -19,12 +19,6 @@ class zookeeper::config (
     '/var/log/zookeeper',
   ]
 
-  #Directories added by zookeeper rpm that we remove to avoid confusion
-  $unused_files = [
-    #'/etc/init.d/zookeeper',
-    #'/etc/zookeeper'
-  ]
-
   file {
     "${exhibitor_catalina_base}/webapps/exhibitor/WEB-INF/classes/exhibitor.properties":
 #                  /opt/tomcat/webapps/exhibitor/WEB-INF/classes/exhibitor.properties
@@ -33,11 +27,13 @@ class zookeeper::config (
       group   => 'tomcat';
     $zookeeper_dirs:
       ensure  => directory,
-      owner   => 'zookeeper',
-      group   => 'zookeeper';
+      owner   => 'tomcat',
+      group   => 'tomcat';
     $unused_files:
       ensure => absent,
-      force  => true,
+      force  => true;
+    '/etc/init.d/zookeeper':
+      content => template('zookeeper/zookeeeper.init.erb');
   }
 
 
@@ -45,8 +41,8 @@ class zookeeper::config (
     file { '/usr/lib/zookeeper/conf/startup.properties':
       ensure  => file,
       content => template('zookeeper/startup.properties.erb'),
-      owner   =>  'zookeeper',
-      group   =>  'zookeeper',
+      owner   =>  'tomcat',
+      group   =>  'tomcat',
     }
   }
 }
