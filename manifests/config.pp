@@ -33,8 +33,8 @@ class zookeeper::config (
       group   => 'tomcat';
     $zookeeper_dirs:
       ensure  => directory,
-      owner   => 'tomcat',
-      group   => 'tomcat';
+      owner   => 'zookeeper',
+      group   => 'zookeeper';
     $unused_files:
       ensure => absent,
       force  => true,
@@ -45,8 +45,8 @@ class zookeeper::config (
     file { '/usr/lib/zookeeper/conf/startup.properties':
       ensure  => file,
       content => template('zookeeper/startup.properties.erb'),
-      owner   =>  'tomcat',
-      group   =>  'tomcat',
+      owner   =>  'zookeeper',
+      group   =>  'zookeeper',
     }
   }
 }
