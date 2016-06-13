@@ -12,7 +12,7 @@ class zookeeper::service (
     enable => $service_enable,
   }
 
-  tomcat::service { 'syncope':
+  tomcat::service { 'exhibitor':
     catalina_base => $catalina_base,
     use_init      => false,
   }
