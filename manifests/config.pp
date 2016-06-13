@@ -33,7 +33,7 @@ class zookeeper::config (
       ensure => absent,
       force  => true;
     '/etc/init.d/zookeeper':
-      content => template('zookeeper/zookeeeper.init.erb');
+      content => template('zookeeper/zookeeper.init.erb');
   }
 
 
