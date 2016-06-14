@@ -4,8 +4,8 @@ describe 'zookeeper' do
   let(:title) { 'zookeeper' }
   let(:node) { 'zookeeper.test.com' }
 
-  describe 'building  on Centos' do
-    let(:facts) { { :operatingsystem  => 'Centos',
+  describe 'building  on CentOS' do
+    let(:facts) { { :operatingsystem  => 'CentOS',
                     :memorysize_mb    => 1024,
                     :concat_basedir   => '/var/lib/puppet/concat',
                     :osfamily         => 'RedHat',
@@ -16,14 +16,10 @@ describe 'zookeeper' do
                     :ipaddress        => '192.168.0.1'
     }}
 
-
     context 'without params ' do
 
       # Test if it compiles
       it { should compile }
-      it { should have_resource_count(27)}
-
-
 
 
       # Test all default params are set
@@ -40,10 +36,7 @@ describe 'zookeeper' do
         should contain_package('netflix-exhibitor-tomcat')
       }
 
-
-
     end
-
   end
 end
 
