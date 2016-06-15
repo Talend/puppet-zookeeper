@@ -6,8 +6,7 @@ class zookeeper::service (
 
 ){
 
-
-  service{'zookeeper':
+  service{ 'zookeeper':
     ensure => $service_ensure,
     enable => $service_enable,
   }
@@ -16,7 +15,5 @@ class zookeeper::service (
     catalina_base => $catalina_base,
     use_init      => false,
   }
-
-
 
 }

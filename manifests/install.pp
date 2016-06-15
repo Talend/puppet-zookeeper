@@ -1,8 +1,9 @@
 class zookeeper::install (
 
-  $package_ensure         = $zookeeper::package_ensure,
+  $package_ensure          = $zookeeper::package_ensure,
   $exhibitor_catalina_base = $zookeeper::exhibitor_catalina_base,
-  $tomcat_version         = $zookeeper::tomcat_version,
+  $tomcat_version          = $zookeeper::tomcat_version,
+
 ){
 
   $source_url = $tomcat_version ? {
@@ -28,7 +29,7 @@ class zookeeper::install (
     'zookeeper':
       ensure => $package_ensure;
     'netflix-exhibitor-tomcat':
-      ensure => $package_ensure,
+      ensure  => $package_ensure,
       require => File['/opt/tomcat'];
   }
 }

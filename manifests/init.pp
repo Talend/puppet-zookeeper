@@ -52,8 +52,6 @@ class zookeeper (
 
 ) inherits zookeeper::params {
 
-
-
   class { 'zookeeper::install': }
   class { 'zookeeper::config': }
   class { 'zookeeper::service': }
@@ -66,6 +64,5 @@ class zookeeper (
   Class['zookeeper::config'] ~>
   Class['zookeeper::service'] ->
   Anchor['zookeeper::end']
-
 
 }
