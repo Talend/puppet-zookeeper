@@ -11,8 +11,11 @@ platforms:
 
 suites:
   - name: default
+    driver:
+      network:
+        - ["forwarded_port", {guest: 8080, host: 8080}]
+        - ["private_network", {ip: "192.168.33.33"}]
     provisioner:
       manifest: default/init.pp
       custom_facts:
         packagecloud_master_token: <%= ENV['PACKAGECLOUD_MASTER_TOKEN'] %>
-
