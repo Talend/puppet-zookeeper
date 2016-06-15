@@ -12,3 +12,11 @@ gem 'rspec-puppet'
 if RUBY_VERSION >= '1.8.7' and RUBY_VERSION < '1.9'
   gem 'rspec', '~> 2.0'
 end
+
+group :system_tests do
+  gem 'librarian-puppet'
+  gem 'test-kitchen'
+  gem 'kitchen-puppet'
+  gem 'kitchen-vagrant'
+  gem 'vagrant'
+end
