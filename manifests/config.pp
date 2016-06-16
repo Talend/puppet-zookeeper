@@ -27,8 +27,6 @@ class zookeeper::config (
       ensure  => directory,
       owner   => 'tomcat',
       group   => 'tomcat';
-    '/etc/init.d/zookeeper':
-      content => template('zookeeper/zookeeper.init.erb');
   }
 
 
