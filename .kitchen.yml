@@ -5,6 +5,7 @@ driver:
 provisioner:
   name: puppet_apply
   manifests_path: test/integration
+  ignore_spec_fixtures: true
 
 platforms:
   - name: centos-7.2
