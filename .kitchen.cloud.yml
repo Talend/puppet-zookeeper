@@ -6,7 +6,7 @@ driver:
   require_chef_omnibus: true
   instance_type: t2.small
   associate_public_ip: true
-  subnet: subnet-fc1352d4
+  subnet_id: subnet-fc1352d4
   security_group_ids: [sg-4d0dee29]
   interface: dns
 
