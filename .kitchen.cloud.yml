@@ -1,0 +1,34 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: "sbaryakov"
+  region: us-east-1
+  require_chef_omnibus: true
+  instance_type: t2.small
+  associate_public_ip: true
+  subnet: subnet-fc1352d4
+  security_group_ids: [sg-4d0dee29]
+  interface: dns
+
+transport:
+  ssh_key: "<%= ENV['HOME'] %>/.ssh/id_rsa"
+
+platforms:
+  - name: centos-7
+    driver:
+      image_id: ami-6d1c2007
+    transport:
+      username: centos
+
+provisioner:
+    name: puppet_apply
+    manifests_path: test/integration
+    ignore_spec_fixtures: true
+
+suites:
+  - name: default
+    provisioner:
+      manifest: default/init.pp
+      custom_facts:
+        packagecloud_master_token: <%= ENV['PACKAGECLOUD_MASTER_TOKEN'] %>
+
