@@ -19,5 +19,6 @@ group :system_tests do
   gem 'kitchen-puppet'
   gem 'kitchen-vagrant'
   gem 'kitchen-ec2'
+  gem 'kitchen-sync'
   gem 'vagrant'
 end
