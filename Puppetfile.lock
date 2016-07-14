@@ -20,11 +20,11 @@ FORGE
       puppetlabs-stdlib (< 5.0.0, >= 4.6.0)
 
 DEPENDENCIES
-  computology-packagecloud (>= 0)
-  maestrodev-wget (= 1.7.3)
-  nanliu-staging (>= 0)
-  puppet-archive (>= 0)
-  puppetlabs-java (= 1.5.0)
-  puppetlabs-stdlib (>= 1.0.0)
-  puppetlabs-tomcat (= 1.5.0)
+  computology-packagecloud (~> 0.0)
+  maestrodev-wget (~> 1.0)
+  nanliu-staging (~> 1.0)
+  puppet-archive (~> 0.0)
+  puppetlabs-java (~> 1.0)
+  puppetlabs-stdlib (< 5.0.0, >= 1.0.0)
+  puppetlabs-tomcat (~> 1.0)
 
