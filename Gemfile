@@ -13,12 +13,14 @@ if RUBY_VERSION >= '1.8.7' and RUBY_VERSION < '1.9'
   gem 'rspec', '~> 2.0'
 end
 
+group :development do
+  gem 'vagrant'
+  gem 'kitchen-vagrant'
+end
+
 group :system_tests do
   gem 'librarian-puppet'
   gem 'test-kitchen'
   gem 'kitchen-puppet'
-  gem 'kitchen-vagrant'
-  gem 'kitchen-ec2'
   gem 'kitchen-sync'
-  gem 'vagrant'
 end
