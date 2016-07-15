@@ -1,8 +1,8 @@
 class zookeeper::config (
 
   $exhibitor_catalina_base = $zookeeper::exhibitor_catalina_base,
-  $jmx_enabled = false,
-  $backup_enabled = false
+  $jmx_enabled             = false,
+  $backup_enabled          = false
 
 ) {
 
@@ -24,9 +24,9 @@ class zookeeper::config (
       owner   => 'tomcat',
       group   => 'tomcat';
     $zookeeper_dirs:
-      ensure  => directory,
-      owner   => 'tomcat',
-      group   => 'tomcat';
+      ensure => directory,
+      owner  => 'tomcat',
+      group  => 'tomcat';
   }
 
 
