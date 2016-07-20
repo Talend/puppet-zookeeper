@@ -1,27 +1,11 @@
-require 'spec_helper_acceptance'
+require 'spec_helper'
 
 describe 'zookeeper' do
-
-  it 'installs without errors' do
-    pp = <<-EOS
-
-    class {'java':}
-
-    include ::packagecloud
-
-    packagecloud::repo {'talend/other':
-      type         => 'rpm',
-      master_token => #{ENV['PACKAGECLOUD_MASTER_TOKEN']}
-    }
-
-
-    class {'::zookeeper': }
-
-    EOS
-
-    apply_manifest(pp, :catch_failures => true)
+  describe port(2181) do
+    it { should be_listening }
   end
 
-
+  describe command('/usr/bin/wget -O - http://127.0.0.1:8080/exhibitor/exhibitor/v1/cluster/state') do
+    its(:stdout) { should include '"description":"serving"' }
+  end
 end
-
