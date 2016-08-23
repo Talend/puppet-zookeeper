@@ -4,12 +4,22 @@ class zookeeper::service {
 
   ensure_packages(['wget'])
 
+  $zookeeper_nodes = unique(concat([$::hostname], $zookeeper::zookeeper_nodes))
+  $zookeeper_nodes_count = count($zookeeper_nodes)
+  if ($zookeeper_nodes_count == 1) or ($zookeeper_nodes_count == 3) {
+    $servers_spec = inline_template(
+      '<%= @zookeeper_nodes.sort.each_with_index.map {|n, i| "S:#{i + 1}:#{n}" }.join(",") %>'
+    )
+  } else {
+    fail("The number of nodes in the zookeeper ensemble is equal to '${$zookeeper_nodes_count}', should be either 1 or 3")
+  }
+
   $config = {
     "logIndexDirectory"         => "/var/lib/zookeeper/data/log",
     "zookeeperInstallDirectory" => "/usr/lib/zookeeper",
     "zookeeperDataDirectory"    => "/var/lib/zookeeper/data",
     "zookeeperLogDirectory"     => "/var/log/zookeeper",
-    "serversSpec"               => "",
+    "serversSpec"               => $servers_spec,
     "backupExtra"               => "",
     "zooCfgExtra"               => {
         "syncLimit" => "5",
