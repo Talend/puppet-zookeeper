@@ -69,11 +69,11 @@ class zookeeper::service {
     use_init       => false,
   } ->
   exec { 'waiting for exhibitor to start':
-    command => "/usr/bin/wget --spider --tries 15 --retry-connrefused http://localhost:${exhibitor_port}/exhibitor/exhibitor/v1/config/get-state",
+    command => "/usr/bin/wget --spider --tries 15 --retry-connrefused http://localhost:${exhibitor_port}/exhibitor/v1/config/get-state",
     require => Package['wget']
   } ->
   exec { 'update the config':
-    command => "/usr/bin/curl -X POST -d '${config_json}' http://localhost:${exhibitor_port}/exhibitor/exhibitor/v1/config/set"
+    command => "/usr/bin/curl -X POST -d '${config_json}' http://localhost:${exhibitor_port}/exhibitor/v1/config/set"
   }
 
 }
