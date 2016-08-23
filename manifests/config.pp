@@ -15,10 +15,10 @@ class zookeeper::config {
   $exhibitor_port = $zookeeper::exhibitor_port
 
   file {
-   '/opt/tomcat/webapps/exhibitor/WEB-INF/classes/exhibitor.properties':
-     content => template('zookeeper/exhibitor.properties.erb'),
-     owner   => 'tomcat',
-     group   => 'tomcat';
+    '/opt/tomcat/webapps/exhibitor/WEB-INF/classes/exhibitor.properties':
+      content => template('zookeeper/exhibitor.properties.erb'),
+      owner   => 'tomcat',
+      group   => 'tomcat';
     $zookeeper_dirs:
       ensure => directory,
       owner  => 'tomcat',
