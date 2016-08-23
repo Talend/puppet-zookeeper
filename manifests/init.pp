@@ -6,7 +6,7 @@ class zookeeper (
   $exhibitor_port       = 8080,
   $backup_enable        = false,
   $backup_bucket_name   = undef,
-  $backup_bucket_prefix = undef,
+  $backup_bucket_prefix = 'exhibitor-backup',
   $zookeeper_nodes      = [],
 
 ) {
