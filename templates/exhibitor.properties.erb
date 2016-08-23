@@ -1,10 +1,3 @@
-<% if @configtype == 's3' -%>
-exhibitor-configtype=s3
-exhibitor-s3config=<%=@s3_config%>
-exhibitor-s3configprefix=<%=@s3_prefix%>
-exhibitor-s3backup=true
-<% else %>
 exhibitor-configtype=file
 exhibitor-fsconfigdir=/opt/tomcat/temp/
-<% end -%>
 exhibitor-port=8080
