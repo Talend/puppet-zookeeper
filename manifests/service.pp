@@ -14,13 +14,30 @@ class zookeeper::service {
     fail("The number of nodes in the zookeeper ensemble is equal to '${$zookeeper_nodes_count}', should be either 1 or 3")
   }
 
+  if $zookeeper::backup_enable {
+    validate_string($zookeeper::backup_bucket_name)
+    validate_string($zookeeper::backup_bucket_prefix)
+
+    $backup_extra_cfg = {
+      'throttle'       => '1048576',
+      'bucket-name'    => $zookeeper::backup_bucket_name,
+      'key-prefix'     => $zookeeper::backup_bucket_prefix,
+      'max-retries'    => '3',
+      'retry-sleep-ms' => '1000',
+    }
+
+    $backup_extra = inline_template('<%= @backup_extra_cfg.map { |k,v| "#{k}=#{v}" }.join("&") %>')
+  } else {
+    $backup_extra = ''
+  }
+
   $config = {
     "logIndexDirectory"         => "/var/lib/zookeeper/data/log",
     "zookeeperInstallDirectory" => "/usr/lib/zookeeper",
     "zookeeperDataDirectory"    => "/var/lib/zookeeper/data",
     "zookeeperLogDirectory"     => "/var/log/zookeeper",
     "serversSpec"               => $servers_spec,
-    "backupExtra"               => "",
+    "backupExtra"               => $backup_extra,
     "zooCfgExtra"               => {
         "syncLimit" => "5",
         "tickTime"  => "2000",
