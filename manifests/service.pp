@@ -5,7 +5,7 @@ class zookeeper::service {
   ensure_packages(['wget'])
 
   $config = {
-    "logIndexDirectory"         => "",
+    "logIndexDirectory"         => "/var/lib/zookeeper/data/log",
     "zookeeperInstallDirectory" => "/usr/lib/zookeeper",
     "zookeeperDataDirectory"    => "/var/lib/zookeeper/data",
     "zookeeperLogDirectory"     => "",
