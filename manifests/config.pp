@@ -11,6 +11,7 @@ class zookeeper::config {
     '/var/log/zookeeper',
   ]
 
+  $exhibitor_port = $zookeeper::exhibitor_port
   file {
    "${zookeeper::catalina_base}/webapps/exhibitor/WEB-INF/classes/exhibitor.properties":
      content => template('zookeeper/exhibitor.properties.erb'),
