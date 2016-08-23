@@ -25,8 +25,7 @@ describe 'zookeeper' do
       # Test all default params are set
       it {
         should contain_class('zookeeper')
-        should contain_class('zookeeper::params')
-        should contain_class('zookeeper::install').with_package_ensure('installed')
+        should contain_class('zookeeper::install')
         should contain_class('zookeeper::config')
         should contain_class('zookeeper::service')
       }
