@@ -4,10 +4,11 @@ class zookeeper::config {
 
   #This directories have to be accessible by tomcat
   $zookeeper_dirs = [
-    '/var/lib/zookeeper/data',
-    '/var/lib/zookeeper',
-    '/usr/lib/zookeeper/conf',
     '/usr/lib/zookeeper',
+    '/usr/lib/zookeeper/conf',
+    '/var/lib/zookeeper',
+    '/var/lib/zookeeper/data',
+    '/var/lib/zookeeper/data/log',
     '/var/log/zookeeper',
   ]
 
