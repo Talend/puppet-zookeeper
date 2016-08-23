@@ -1,22 +1,14 @@
 class zookeeper (
 
-  $package_ensure           = $zookeeper::params::package_ensure,
-  $tomcat_version           = $zookeeper::params::tomcat_version,
-  $exhibitor_catalina_base  = $zookeeper::params::exhibitor_catalina_base,
+  $tomcat_source_url  = 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.2/bin/apache-tomcat-8.5.2.tar.gz',
+  $catalina_base      = '/opt/apache-tomcat',
+  $service_ensure     = running,
+  $zookeeper_nodes    = [],
 
-) inherits zookeeper::params {
+) {
 
-  class { 'zookeeper::install': }
-  class { 'zookeeper::config': }
-  class { 'zookeeper::service': }
-
-  anchor { 'zookeeper::begin': }
-  anchor { 'zookeeper::end': }
-
-  Anchor['zookeeper::begin'] ->
-  Class['zookeeper::install'] ->
-  Class['zookeeper::config'] ~>
-  Class['zookeeper::service'] ->
-  Anchor['zookeeper::end']
+  contain ::zookeeper::install
+  contain ::zookeeper::config
+  contain ::zookeeper::service
 
 }
