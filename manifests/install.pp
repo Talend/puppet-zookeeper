@@ -11,13 +11,12 @@ class zookeeper::install {
     install_from_source => true,
     source_url          => $zookeeper::tomcat_source_url,
     catalina_base       => $zookeeper::catalina_base,
-    java_home           => $::java_default_home,
   } ->
   package {
     'zookeeper':
-      ensure => $zookeeper::service_ensure;
+      ensure => installed;
     'netflix-exhibitor-tomcat':
-      ensure  => $zookeeper::service_ensure,
+      ensure  => installed,
       require => File['/opt/tomcat'];
   }
 
