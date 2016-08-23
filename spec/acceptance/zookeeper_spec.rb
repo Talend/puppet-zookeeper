@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe 'zookeeper' do
+
+  context 'When Zookeeper installed' do
+    describe 'Tomcat Server Info' do
+      subject { command('/usr/bin/java -cp /opt/tomcat/lib/catalina.jar org.apache.catalina.util.ServerInfo') }
+      its(:stdout) { should include 'Apache Tomcat/8.5.2' }
+    end
+  end
+
   describe port(2181) do
     it { should be_listening }
   end
