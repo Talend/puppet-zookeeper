@@ -13,7 +13,8 @@ class zookeeper::install {
   } ->
   exec { 'publishing exhibitor : 1':
     cwd     => $zookeeper::catalina_base,
-    command => '/usr/bin/rm -rf webapps/docs webapps/examples webapps/host-manager webapps/manager webapps/ROOT && /usr/bin/touch /tmp/exhibitor.1',
+    command => '/usr/bin/rm -rf webapps/docs webapps/examples \
+    webapps/host-manager webapps/manager webapps/ROOT && /usr/bin/touch /tmp/exhibitor.1',
     creates => '/tmp/exhibitor.1'
   } ->
   exec { 'publishing exhibitor : 2':
