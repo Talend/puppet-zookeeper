@@ -8,6 +8,10 @@ provisioner:
   name: puppet_apply
   manifests_path: examples
   ignore_spec_fixtures: true
+  puppet_environment: vagrant
+  hiera_data_path: hieradata
+  hiera_data_remote_path: /etc/puppet/hieradata
+  puppet_debug: true
 
 transport:
   name: sftp
