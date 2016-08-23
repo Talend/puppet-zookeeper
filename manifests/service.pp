@@ -8,7 +8,7 @@ class zookeeper::service {
     "logIndexDirectory"         => "/var/lib/zookeeper/data/log",
     "zookeeperInstallDirectory" => "/usr/lib/zookeeper",
     "zookeeperDataDirectory"    => "/var/lib/zookeeper/data",
-    "zookeeperLogDirectory"     => "",
+    "zookeeperLogDirectory"     => "/var/log/zookeeper",
     "serversSpec"               => "",
     "backupExtra"               => "",
     "zooCfgExtra"               => {
