@@ -13,6 +13,7 @@ class zookeeper::config {
   ]
 
   $exhibitor_port = $zookeeper::exhibitor_port
+
   file {
    "${zookeeper::catalina_base}/webapps/exhibitor/WEB-INF/classes/exhibitor.properties":
      content => template('zookeeper/exhibitor.properties.erb'),
@@ -24,13 +25,4 @@ class zookeeper::config {
       group  => 'tomcat';
   }
 
-
-  if $backup_enabled {
-    file { '/usr/lib/zookeeper/conf/startup.properties':
-      ensure  => file,
-      content => template('zookeeper/startup.properties.erb'),
-      owner   =>  'tomcat',
-      group   =>  'tomcat',
-    }
-  }
 }
