@@ -4,7 +4,7 @@ class zookeeper::service {
 
   ensure_packages(['wget'])
 
-  $zookeeper_nodes = unique(concat([$::ipaddress], $zookeeper::zookeeper_nodes))
+  $zookeeper_nodes = unique($zookeeper::zookeeper_nodes)
   $zookeeper_nodes_count = count($zookeeper_nodes)
   if ($zookeeper_nodes_count == 1) or ($zookeeper_nodes_count == 3) {
     $servers_spec = inline_template(
