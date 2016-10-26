@@ -3,6 +3,11 @@ describe 'zookeeper' do
 
   let(:title) { 'zookeeper' }
   let(:node) { 'zookeeper.test.com' }
+  let(:params) {
+    {
+      :zookeeper_nodes => ['zookeeper.test.com']
+    }
+  }
 
   describe 'building  on CentOS' do
     let(:facts) { { :operatingsystem  => 'CentOS',
@@ -16,7 +21,7 @@ describe 'zookeeper' do
                     :ipaddress        => '192.168.0.1'
     }}
 
-    context 'without params ' do
+    context 'with all the required parameters set' do
 
       # Test if it compiles
       it { should compile }
