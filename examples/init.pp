@@ -16,4 +16,6 @@ packagecloud::repo { 'talend/other':
   type         => 'rpm',
   master_token => $packagecloud_master_token
 } ->
-class { '::zookeeper': }
+class { '::zookeeper':
+  zookeeper_nodes => [$::ipaddress]
+}
