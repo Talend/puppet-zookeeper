@@ -9,6 +9,22 @@ describe 'zookeeper' do
     end
   end
 
+  context 'When Exhibitor configured' do
+    describe file('/etc/rc.d/init.d/zookeeper') do
+      it { should_not exist }
+    end
+
+    describe file('/etc/init.d/zookeeper') do
+      it { should_not exist }
+    end
+
+    describe command('/usr/bin/curl -v http://127.0.0.1:8080/exhibitor/v1/config/get-state') do
+      its(:stdout) { should include '"clientPort":2181' }
+      its(:stdout) { should include '"connectPort":2888' }
+      its(:stdout) { should include '"electionPort":3888' }
+    end
+  end
+
   context 'When Exhibitor running' do
     describe port(8080) do
       it { should be_listening }
@@ -16,6 +32,10 @@ describe 'zookeeper' do
 
     describe command('/usr/bin/wget -O - http://127.0.0.1:8080/exhibitor/v1/cluster/state') do
       its(:stdout) { should match /"description":"(serving|latent)"/ }
+    end
+
+    describe service('tomcat-exhibitor') do
+      it { should be_running.under('systemd') }
     end
   end
 

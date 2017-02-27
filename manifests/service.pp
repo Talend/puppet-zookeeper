@@ -63,24 +63,25 @@ class zookeeper::service {
   $config_json    = sorted_json($config)
   $exhibitor_port = $zookeeper::exhibitor_port
 
+  file { '/usr/lib/systemd/system/tomcat-exhibitor.service':
+    content => template('zookeeper/tomcat.service.erb'),
+  } ->
+  service { 'tomcat-exhibitor':
+    ensure   => $zookeeper::service_ensure,
+    enable   => $zookeeper::service_enable,
+    provider => 'systemd',
+  }
+
   if $zookeeper::service_ensure != 'stopped' {
-    tomcat::service { 'exhibitor':
-      service_ensure => $zookeeper::service_ensure,
-      catalina_base  => $zookeeper::catalina_base,
-      use_init       => false,
-    } ->
     exec { 'waiting for exhibitor to start':
       command => "/usr/bin/wget --spider --tries 15 --retry-connrefused http://localhost:${exhibitor_port}/exhibitor/v1/config/get-state",
-      require => Package['wget']
+      require => [
+        Package['wget'],
+        Service['tomcat-exhibitor']
+      ]
     } ->
     exec { 'update the config':
       command => "/usr/bin/curl -X POST -d '${config_json}' http://localhost:${exhibitor_port}/exhibitor/v1/config/set"
-    }
-  } else {
-    tomcat::service { 'exhibitor':
-      service_ensure => $zookeeper::service_ensure,
-      catalina_base  => $zookeeper::catalina_base,
-      use_init       => false,
     }
   }
 
