@@ -1,0 +1,19 @@
+# Systemd unit file for default tomcat
+#
+# To create clones of this service:
+# DO NOTHING, use tomcat@.service instead.
+
+[Unit]
+Description=Apache Tomcat Web Application Container
+
+[Service]
+Type=forking
+Environment="CATALINA_HOME=/opt/apache-tomcat" "CATALINA_BASE=/opt/apache-tomcat"
+ExecStart=/opt/apache-tomcat/bin/catalina.sh start
+ExecStop=/opt/apache-tomcat/bin/catalina.sh stop
+SuccessExitStatus=143
+User=tomcat
+Group=tomcat
+
+[Install]
+Alias=tomcat-exhibitor
