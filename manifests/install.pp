@@ -9,7 +9,7 @@ class zookeeper::install {
     'zookeeper':
       ensure => installed;
     'netflix-exhibitor-tomcat':
-      ensure  => installed;
+      ensure => installed;
   } ->
   exec { 'publishing exhibitor : 1':
     cwd     => $zookeeper::catalina_base,
