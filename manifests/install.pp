@@ -11,6 +11,12 @@ class zookeeper::install {
     'netflix-exhibitor-tomcat':
       ensure => installed;
   } ->
+  file {
+    '/etc/rc.d/init.d/zookeeper':
+      ensure => absent;
+    '/etc/init.d/zookeeper':
+      ensure => absent;
+  } ->
   exec { 'publishing exhibitor : 1':
     cwd     => $zookeeper::catalina_base,
     command => '/usr/bin/rm -rf webapps/docs webapps/examples \
