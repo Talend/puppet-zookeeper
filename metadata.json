@@ -8,12 +8,12 @@
   "project_page": "https://github.com/Talend/puppet-zookeeper",
   "issues_url": "https://github.com/Talend/puppet-zookeeper/issues",
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">=1.0.0 <5.0.0"},
-    {"name":"puppet/archive","version_requirement":"0.x"},
-    {"name":"nanliu/staging","version_requirement":"1.x"},
-    {"name":"puppetlabs/java","version_requirement":"1.x"},
-    {"name":"puppetlabs/tomcat","version_requirement":"1.x"},
-    {"name":"maestrodev/wget","version_requirement":"1.x"},
-    {"name":"computology/packagecloud","version_requirement":"0.x"}
+    {"name":"puppetlabs/stdlib", "version_requirement":">=1.0.0 <5.0.0"},
+    {"name":"puppet/archive", "version_requirement":"0.x"},
+    {"name":"nanliu/staging", "version_requirement":"1.x"},
+    {"name":"puppetlabs/java", "version_requirement":"1.x"},
+    {"name":"puppetlabs/tomcat", "version_requirement":"1.x"},
+    {"name":"maestrodev/wget", "version_requirement":"1.x"},
+    {"name":"computology/packagecloud", "version_requirement":"0.x"}
   ]
 }

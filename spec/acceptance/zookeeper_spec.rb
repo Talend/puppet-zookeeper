@@ -7,6 +7,11 @@ describe 'zookeeper' do
       subject { command('/usr/bin/java -cp /opt/apache-tomcat/lib/catalina.jar org.apache.catalina.util.ServerInfo') }
       its(:stdout) { should include 'Apache Tomcat/8.5.2' }
     end
+    describe 'Tomcat Home Directory' do
+       subject { file('/home/tomcat') }
+       it { should be_directory }
+       it { should be_owned_by 'tomcat' }
+    end
   end
 
   context 'When Exhibitor configured' do

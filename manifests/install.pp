@@ -34,4 +34,12 @@ class zookeeper::install {
     creates => '/tmp/exhibitor.3'
   }
 
+  ensure_resource('file', '/home/tomcat', {
+    'ensure' => 'directory',
+    'owner'  => 'tomcat',
+    'group'  => 'tomcat',
+    'mode'   => '0700',
+    'before' => Package['netflix-exhibitor-tomcat']
+  })
+
 }
