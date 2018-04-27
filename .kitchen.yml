@@ -3,6 +3,8 @@ driver:
   name: vagrant
   network:
     - ["forwarded_port", {guest: 8080, host: 8080}]
+  customize:
+    name: 'puppet-zookeeper'
 
 provisioner:
   name: puppet_apply
@@ -17,7 +19,7 @@ transport:
   name: sftp
 
 platforms:
-  - name: centos-7.2
+  - name: centos-7.4
 
 verifier:
   name: serverspec
@@ -25,7 +27,7 @@ verifier:
   extra_flags: '--require spec_helper -I spec/acceptance'
 
 suites:
-  - name: default
+  - name: zookeeper
     provisioner:
       manifest: init.pp
       custom_facts:
