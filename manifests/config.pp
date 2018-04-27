@@ -1,3 +1,5 @@
+# configuration for zookeeper and exhibitor
+
 class zookeeper::config {
 
   require ::zookeeper::install
@@ -25,4 +27,13 @@ class zookeeper::config {
       group  => 'tomcat';
   }
 
+  file {
+    "${::zookeeper::zookeeper_cfg_dir}/myid":
+      ensure  => file,
+      content => template('zookeeper/myid.erb'),
+      owner   => $zookeeper::zookeeper_user,
+      group   => $zookeeper::zookeeper_user_group,
+      mode    => '0644',
+      require => File[$zookeeper::zookeeper_cfg_dir],
+  }
 }
