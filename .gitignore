@@ -11,3 +11,5 @@ spec/fixtures
 .tmp/
 modules/
 build/
+*.swp
+.ruby-version
