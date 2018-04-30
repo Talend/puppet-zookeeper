@@ -26,14 +26,18 @@ class zookeeper::config {
       owner  => 'tomcat',
       group  => 'tomcat';
   }
-
+  $myid= $::AWSResourceName ? {
+    InstanceA => '1',
+    InstanceB => '2',
+    InstanceC => '3'
+  }
   file {
     "${::zookeeper::zookeeper_cfg_dir}/myid":
       ensure  => file,
-      content => template('zookeeper/myid.erb'),
+      content => $myid,
       owner   => $zookeeper::zookeeper_user,
       group   => $zookeeper::zookeeper_user_group,
       mode    => '0644',
-      require => File[$zookeeper::zookeeper_cfg_dir],
+      require => Class['::zookeeper::install']
   }
 }

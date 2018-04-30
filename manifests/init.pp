@@ -13,7 +13,6 @@ class zookeeper (
   $zookeeper_cfg_dir    = '/var/lib/zookeeper/data',
   $zookeeper_user       = 'tomcat',
   $zookeeper_user_group = 'tomcat',
-  $id                   = '1'
 
 ) {
 
