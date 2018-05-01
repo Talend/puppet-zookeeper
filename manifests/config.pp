@@ -29,7 +29,8 @@ class zookeeper::config {
   $myid= $::AWSResourceName ? {
     InstanceA => '1',
     InstanceB => '2',
-    InstanceC => '3'
+    InstanceC => '3',
+    undef     => 'No Value'
   }
   file {
     "${::zookeeper::zookeeper_cfg_dir}/myid":
