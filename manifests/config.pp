@@ -1,3 +1,5 @@
+# configuration for zookeeper and exhibitor
+
 class zookeeper::config {
 
   require ::zookeeper::install
@@ -24,5 +26,19 @@ class zookeeper::config {
       owner  => 'tomcat',
       group  => 'tomcat';
   }
-
+  $myid= $::AWSResourceName ? {
+    InstanceA => '1',
+    InstanceB => '2',
+    InstanceC => '3',
+    undef     => 'No Value'
+  }
+  file {
+    "${::zookeeper::zookeeper_cfg_dir}/myid":
+      ensure  => file,
+      content => $myid,
+      owner   => $zookeeper::zookeeper_user,
+      group   => $zookeeper::zookeeper_user_group,
+      mode    => '0644',
+      require => Class['::zookeeper::install']
+  }
 }
