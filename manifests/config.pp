@@ -26,7 +26,7 @@ class zookeeper::config {
       owner  => 'tomcat',
       group  => 'tomcat';
   }
-  $myid= $::AWSResourceName ? {
+  $myid= $::cfn_resource_name ? {
     InstanceA => '1',
     InstanceB => '2',
     InstanceC => '3',
