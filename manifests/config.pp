@@ -34,7 +34,7 @@ class zookeeper::config {
   }
   file {
     "${::zookeeper::zookeeper_cfg_dir}/myid":
-      ensure  => file,
+      ensure  => present,
       content => $myid,
       owner   => $zookeeper::zookeeper_user,
       group   => $zookeeper::zookeeper_user_group,
