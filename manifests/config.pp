@@ -33,12 +33,9 @@ class zookeeper::config {
     undef     => 'No Value'
   }
   file {
-    "${::zookeeper::zookeeper_cfg_dir}/myid":
-      ensure  => present,
+    '/var/lib/zookeeper/data/myid':
       content => $myid,
       owner   => $zookeeper::zookeeper_user,
       group   => $zookeeper::zookeeper_user_group,
-      mode    => '0644',
-      require => Class['::zookeeper::install']
   }
 }
