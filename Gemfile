@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'puppet', '~> 3.8'
+gem 'librarian-puppet', '~> 3.0'
 gem 'rake'
 
 group :test do
@@ -14,7 +15,6 @@ group :development do
 end
 
 group :system_tests do
-  gem 'librarian-puppet'
   gem 'test-kitchen'
   gem 'kitchen-puppet'
   gem 'kitchen-sync'
