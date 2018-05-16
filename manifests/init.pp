@@ -19,6 +19,5 @@ class zookeeper (
   contain ::zookeeper::install
   contain ::zookeeper::config
   contain ::zookeeper::service
-  contain ::zookeeper::post_install
 
 }

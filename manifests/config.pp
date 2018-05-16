@@ -13,7 +13,12 @@ class zookeeper::config {
     '/var/lib/zookeeper/data/log',
     '/var/log/zookeeper',
   ]
-
+  $myid= $::cfn_resource_name ? {
+    InstanceA => '1',
+    InstanceB => '2',
+    InstanceC => '3',
+    undef     => 'No Value'
+  }
   $exhibitor_port = $zookeeper::exhibitor_port
 
   file {
@@ -25,5 +30,10 @@ class zookeeper::config {
       ensure => directory,
       owner  => 'tomcat',
       group  => 'tomcat';
+    '/var/lib/zookeeper/data/myid':
+      ensure  => file,
+      content => $myid,
+      owner   => $zookeeper::zookeeper_user,
+      group   => $zookeeper::zookeeper_user_group,
   }
 }
