@@ -26,16 +26,4 @@ class zookeeper::config {
       owner  => 'tomcat',
       group  => 'tomcat';
   }
-  $myid= $::cfn_resource_name ? {
-    InstanceA => '1',
-    InstanceB => '2',
-    InstanceC => '3',
-    undef     => 'No Value'
-  }
-  file {
-    '/var/lib/zookeeper/data/myid':
-      content => $myid,
-      owner   => $zookeeper::zookeeper_user,
-      group   => $zookeeper::zookeeper_user_group,
-  }
 }
