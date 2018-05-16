@@ -1,5 +1,5 @@
 # post install steps
-  
+
 class zookeeper::post_install {
 
   require ::zookeeper::service
