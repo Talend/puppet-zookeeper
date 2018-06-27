@@ -39,9 +39,9 @@ class zookeeper::service {
     'serversSpec'               => $servers_spec,
     'backupExtra'               => $backup_extra,
     'zooCfgExtra'               => {
-        'syncLimit' => '5',
+        'syncLimit' => '10',
         'tickTime'  => '2000',
-        'initLimit' => '10',
+        'initLimit' => '20',
     },
     'javaEnvironment'                      => '',
     'log4jProperties'                      => '',
