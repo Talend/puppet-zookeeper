@@ -42,6 +42,8 @@ class zookeeper::service {
         'syncLimit' => '5',
         'tickTime'  => '2000',
         'initLimit' => '10',
+        'autopurge.snapRetainCount' => '3',
+        'autopurge.purgeInterval' => '1',
     },
     'javaEnvironment'                      => '',
     'log4jProperties'                      => '',
