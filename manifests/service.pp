@@ -39,9 +39,9 @@ class zookeeper::service {
     'serversSpec'               => $servers_spec,
     'backupExtra'               => $backup_extra,
     'zooCfgExtra'               => {
-        'syncLimit' => '10',
+        'syncLimit' => '5',
         'tickTime'  => '2000',
-        'initLimit' => '20',
+        'initLimit' => '10',
     },
     'javaEnvironment'                      => '',
     'log4jProperties'                      => '',
@@ -84,5 +84,19 @@ class zookeeper::service {
       command => "/usr/bin/curl -X POST -d '${config_json}' http://localhost:${exhibitor_port}/exhibitor/v1/config/set"
     }
   }
+  $myid= $::cfn_resource_name ? {
+    InstanceA => '1',
+    InstanceB => '2',
+    InstanceC => '3',
+    undef     => 'No Value'
+  }
+  file {
+    '/var/lib/zookeeper/data/myid':
+      ensure  => file,
+      content => $myid,
+      owner   => $zookeeper::zookeeper_user,
+      group   => $zookeeper::zookeeper_user_group,
+  }
+
 
 }
