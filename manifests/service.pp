@@ -30,7 +30,12 @@ class zookeeper::service {
   } else {
     $backup_extra = ''
   }
-
+  $myid= $::cfn_resource_name ? {
+    InstanceA => '1',
+    InstanceB => '2',
+    InstanceC => '3',
+    undef     => 'No Value'
+  }
   $config = {
     'logIndexDirectory'         => '/var/lib/zookeeper/data/log',
     'zookeeperInstallDirectory' => '/usr/lib/zookeeper',
@@ -59,6 +64,7 @@ class zookeeper::service {
     'autoManageInstancesFixedEnsembleSize' => 0,
     'autoManageInstancesApplyAllAtOnce'    => 1,
     'controlPanel'                         => {},
+    'serverId'                             => $myid,
   }
   $config_json    = sorted_json($config)
   $exhibitor_port = $zookeeper::exhibitor_port
@@ -84,19 +90,4 @@ class zookeeper::service {
       command => "/usr/bin/curl -X POST -d '${config_json}' http://localhost:${exhibitor_port}/exhibitor/v1/config/set"
     }
   }
-  $myid= $::cfn_resource_name ? {
-    InstanceA => '1',
-    InstanceB => '2',
-    InstanceC => '3',
-    undef     => 'No Value'
-  }
-  file {
-    '/var/lib/zookeeper/data/myid':
-      ensure  => file,
-      content => $myid,
-      owner   => $zookeeper::zookeeper_user,
-      group   => $zookeeper::zookeeper_user_group,
-  }
-
-
 }
