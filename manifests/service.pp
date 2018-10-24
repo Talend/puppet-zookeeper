@@ -36,6 +36,7 @@ class zookeeper::service {
     InstanceC => '3',
     undef     => 'No Value'
   }
+  notice("======= got myid details $myid =====")
   $config = {
     'logIndexDirectory'         => '/var/lib/zookeeper/data/log',
     'zookeeperInstallDirectory' => '/usr/lib/zookeeper',
