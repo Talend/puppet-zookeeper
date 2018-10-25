@@ -37,9 +37,10 @@ class zookeeper::service {
     undef     => 'No Value'
   }
   notice("======= got myid details $myid =====")
-  if($myid == 'No Value'){
+  if $myid == 'No Value' {
     $myid => '1'
   }
+
   $config = {
     'logIndexDirectory'         => '/var/lib/zookeeper/data/log',
     'zookeeperInstallDirectory' => '/usr/lib/zookeeper',
