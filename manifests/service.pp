@@ -68,6 +68,7 @@ class zookeeper::service {
     'serverId'                             => $myid,
   }
   $config_json    = sorted_json($config)
+  notice("======= got config json config_json =====")
   $exhibitor_port = $zookeeper::exhibitor_port
 
   file { '/usr/lib/systemd/system/tomcat-exhibitor.service':
