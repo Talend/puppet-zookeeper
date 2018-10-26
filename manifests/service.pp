@@ -37,6 +37,7 @@ class zookeeper::service {
     undef     => '4'
   }
   notice("======= got myid details $myid =====")
+  $myid=scanf($myid)
 
   $config = {
     'logIndexDirectory'         => '/var/lib/zookeeper/data/log',
@@ -45,7 +46,7 @@ class zookeeper::service {
     'zookeeperLogDirectory'     => '/var/log/zookeeper',
     'serversSpec'               => $servers_spec,
     'backupExtra'               => $backup_extra,
-    'serverId'                  => 0+$myid,
+    'serverId'                  => $myid
     'zooCfgExtra'               => {
         'syncLimit' => '5',
         'tickTime'  => '2000',
