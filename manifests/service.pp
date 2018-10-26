@@ -34,7 +34,7 @@ class zookeeper::service {
     InstanceA => '1',
     InstanceB => '2',
     InstanceC => '3',
-    undef     => 'No Value'
+    undef     => '4'
   }
   notice("======= got myid details $myid =====")
 
@@ -45,7 +45,7 @@ class zookeeper::service {
     'zookeeperLogDirectory'     => '/var/log/zookeeper',
     'serversSpec'               => $servers_spec,
     'backupExtra'               => $backup_extra,
-    'serverId'                  => $myid,
+    'serverId'                  => 0+$myid,
     'zooCfgExtra'               => {
         'syncLimit' => '5',
         'tickTime'  => '2000',
