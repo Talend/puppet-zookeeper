@@ -92,5 +92,14 @@ class zookeeper::service {
     exec { 'update the config':
       command => "/usr/bin/curl -X POST -d '${config_json}' http://localhost:${exhibitor_port}/exhibitor/v1/config/set"
     }
+    file {
+    "${::zookeeper::zookeeper_cfg_dir}/myid":
+      ensure  => present,
+      content => $myid,
+      owner   => $zookeeper::zookeeper_user,
+      group   => $zookeeper::zookeeper_user_group,
+      mode    => '0644',
+      require => Class['::zookeeper::install']
+    }
   }
 }
