@@ -46,7 +46,7 @@ class zookeeper::service {
     'zookeeperLogDirectory'     => '/var/log/zookeeper',
     'serversSpec'               => $servers_spec,
     'backupExtra'               => $backup_extra,
-    'serverId'                  => $myid
+    'serverId'                  => $myid,
     'zooCfgExtra'               => {
         'syncLimit' => '5',
         'tickTime'  => '2000',
