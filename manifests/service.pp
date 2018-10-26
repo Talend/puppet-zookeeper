@@ -37,7 +37,7 @@ class zookeeper::service {
     undef     => '4'
   }
   notice("======= got myid details $myid =====")
-  $myid=scanf($myid)
+  $myid=scanf({$myid})
 
   $config = {
     'logIndexDirectory'         => '/var/lib/zookeeper/data/log',
