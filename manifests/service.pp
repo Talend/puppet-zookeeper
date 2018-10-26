@@ -37,9 +37,6 @@ class zookeeper::service {
     undef     => 'No Value'
   }
   notice("======= got myid details $myid =====")
-  if $myid == 'No Value' {
-    $myid => '1'
-  }
 
   $config = {
     'logIndexDirectory'         => '/var/lib/zookeeper/data/log',
@@ -48,6 +45,7 @@ class zookeeper::service {
     'zookeeperLogDirectory'     => '/var/log/zookeeper',
     'serversSpec'               => $servers_spec,
     'backupExtra'               => $backup_extra,
+    'serverId'                  => $myid,
     'zooCfgExtra'               => {
         'syncLimit' => '5',
         'tickTime'  => '2000',
@@ -69,7 +67,6 @@ class zookeeper::service {
     'autoManageInstancesFixedEnsembleSize' => 0,
     'autoManageInstancesApplyAllAtOnce'    => 1,
     'controlPanel'                         => {},
-    'serverId'                             => $myid,
   }
   $config_json    = sorted_json($config)
   notice("======= got config json config_json =====")
