@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'puppet', '~> 3.8'
 gem 'librarian-puppet', '~> 3.0'
 gem 'rake'
+gem 'kitchen-ec2', '1.3.2'
 
 group :test do
   gem 'metadata-json-lint'
