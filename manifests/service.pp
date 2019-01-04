@@ -31,6 +31,9 @@ class zookeeper::service {
     $backup_extra = ''
   }
 
+  $jmx_exporter_version = '0.3.1'
+  $java_env = "SERVER_JVMFLAGS='-javaagent:/opt/jmx_exporter-${jmx_exporter_version}/jmx_prometheus_javaagent-${jmx_exporter_version}.jar=9404:/opt/jmx_exporter-${jmx_exporter_version}/zookeeper.yaml'"
+
   $config = {
     'logIndexDirectory'         => '/var/lib/zookeeper/data/log',
     'zookeeperInstallDirectory' => '/usr/lib/zookeeper',
@@ -43,7 +46,7 @@ class zookeeper::service {
         'tickTime'                  => '2000',
         'initLimit'                 => '10',
     },
-    'javaEnvironment'                      => '',
+    'javaEnvironment'                      => $java_env,
     'log4jProperties'                      => '',
     'clientPort'                           => 2181,
     'connectPort'                          => 2888,
