@@ -27,7 +27,6 @@ describe 'zookeeper' do
       its(:stdout) { should include '"clientPort":2181' }
       its(:stdout) { should include '"connectPort":2888' }
       its(:stdout) { should include '"electionPort":3888' }
-      its(:stdout) { should include '"javaEnvironment":"SERVER_JVMFLAGS=-javaagent:/opt/jmx_exporter' }
     end
   end
 

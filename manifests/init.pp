@@ -6,6 +6,7 @@ class zookeeper (
   $service_ensure       = running,
   $service_enable       = true,
   $exhibitor_port       = 8080,
+  $zookeeper_java_env   = '',
   $backup_enable        = false,
   $backup_bucket_name   = undef,
   $backup_bucket_prefix = 'exhibitor-backup',
