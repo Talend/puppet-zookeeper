@@ -14,6 +14,13 @@ describe 'zookeeper' do
     end
   end
 
+  describe 'Tomcat context.xml' do
+    subject { file('/opt/apache-tomcat/conf/context.xml') }
+    it { should be_file }
+    it { should be_owned_by 'tomcat' }
+    its(:content) { should include '<Resources cachingAllowed="true" cacheMaxSize="100000" />' }
+  end
+
   describe command('/usr/bin/sleep 120') do
     its(:exit_status) { should eq 0 }
   end
