@@ -14,6 +14,10 @@ describe 'zookeeper' do
     end
   end
 
+  describe command('/usr/bin/sleep 120') do
+    its(:exit_status) { should eq 0 }
+  end
+
   context 'When Exhibitor configured' do
     describe file('/etc/rc.d/init.d/zookeeper') do
       it { should_not exist }
@@ -44,4 +48,11 @@ describe 'zookeeper' do
     end
   end
 
+  describe port(2181) do
+    it { should be_listening }
+  end
+
+  describe command('echo ruok | /bin/nc 127.0.0.1 2181') do
+    its(:stdout) { should eq 'imok' }
+  end
 end
