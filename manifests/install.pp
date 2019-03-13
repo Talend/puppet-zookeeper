@@ -8,8 +8,9 @@ class zookeeper::install {
   package {
     'zookeeper':
       ensure => installed;
+    # https://github.com/Talend/tipaas-ops/blob/trunk/build_scripts/netflix-exhibitor/exhibitor-rpm.sh
     'netflix-exhibitor-tomcat':
-      ensure => installed;
+      ensure => $::zookeeper::exhibitor_version;
   } ->
   file { '/opt/apache-tomcat/conf/context.xml':
     ensure => file,

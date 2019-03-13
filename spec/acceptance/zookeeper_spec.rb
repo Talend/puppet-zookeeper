@@ -12,6 +12,10 @@ describe 'zookeeper' do
        it { should be_directory }
        it { should be_owned_by 'tomcat' }
     end
+    describe 'Exhibitor package' do
+      subject { command('/bin/rpm -q netflix-exhibitor-tomcat') }
+      its(:stdout) { should include 'netflix-exhibitor-tomcat-1.7.1-1.x86_64' }
+    end
   end
 
   describe 'Tomcat context.xml' do

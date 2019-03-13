@@ -32,6 +32,8 @@ suites:
       manifest: init.pp
       custom_facts:
         packagecloud_master_token: <%= ENV['PACKAGECLOUD_MASTER_TOKEN'] %>
+        packagecloud_test_token: <%= ENV['PACKAGECLOUD_TEST_TOKEN'] %>
+        cfn_stack_name: 'InstanceA'
     verifier:
       patterns:
         - 'spec/acceptance/**_spec.rb'

@@ -14,10 +14,18 @@ class zookeeper (
   $zookeeper_cfg_dir    = '/var/lib/zookeeper/data',
   $zookeeper_user       = 'tomcat',
   $zookeeper_user_group = 'tomcat',
+  $exhibitor_version    = 'installed'
 
 ) {
-  contain ::zookeeper::install
-  contain ::zookeeper::config
-  contain ::zookeeper::service
+
+  anchor { '::zookeeper::begin:': }
+  ->
+  class { '::zookeeper::install': }
+  ->
+  class { '::zookeeper::config': }
+  ->
+  class { '::zookeeper::service': }
+  ->
+  anchor { '::zookeeper::end:': }
 
 }

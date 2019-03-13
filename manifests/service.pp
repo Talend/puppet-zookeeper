@@ -31,8 +31,9 @@ class zookeeper::service {
     $backup_extra = ''
   }
 
-
   $config = {
+    'hostname'                  => $::hostname,
+    'serverId'                  => $zookeeper::config::myid,
     'logIndexDirectory'         => '/var/lib/zookeeper/data/log',
     'zookeeperInstallDirectory' => '/usr/lib/zookeeper',
     'zookeeperDataDirectory'    => '/var/lib/zookeeper/data',
@@ -40,12 +41,12 @@ class zookeeper::service {
     'serversSpec'               => $servers_spec,
     'backupExtra'               => $backup_extra,
     'zooCfgExtra'               => {
-        'syncLimit'                 => '5',
-        'tickTime'                  => '2000',
-        'initLimit'                 => '10',
+        'syncLimit'             => '5',
+        'tickTime'              => '2000',
+        'initLimit'             => '10',
     },
     'javaEnvironment'                      => $zookeeper::zookeeper_java_env,
-    'log4jProperties'                      => '',
+    'log4jProperties'                      => template('zookeeper/log4j.properties.erb'),
     'clientPort'                           => 2181,
     'connectPort'                          => 2888,
     'electionPort'                         => 3888,
@@ -85,5 +86,4 @@ class zookeeper::service {
       command => "/usr/bin/curl -X POST -d '${config_json}' http://localhost:${exhibitor_port}/exhibitor/v1/config/set"
     }
   }
-
 }
