@@ -32,17 +32,19 @@ class zookeeper::config {
     InstanceC => '3',
     undef     => 'No Value'
   }
-  file {
-    "${::zookeeper::zookeeper_cfg_dir}/myid":
-      ensure  => present,
-      content => $myid,
-      owner   => $zookeeper::zookeeper_user,
-      group   => $zookeeper::zookeeper_user_group,
-      mode    => '0644',
-      require => Class['::zookeeper::install']
-  } ->
-  exec { 'protect zookeeper id':
-    command => "/bin/chattr +a ${::zookeeper::zookeeper_cfg_dir}/myid && /usr/bin/touch /tmp/exhibitor.id.chattr",
-    creates => '/tmp/exhibitor.id.chattr'
+  if $::zookeeper::service_ensure == 'running' {
+    file {
+      "${::zookeeper::zookeeper_cfg_dir}/myid":
+        ensure  => present,
+        content => $myid,
+        owner   => $zookeeper::zookeeper_user,
+        group   => $zookeeper::zookeeper_user_group,
+        mode    => '0644',
+        require => Class['::zookeeper::install']
+    } ->
+    exec { 'protect zookeeper id':
+      command => "/bin/chattr +a ${::zookeeper::zookeeper_cfg_dir}/myid && /usr/bin/touch /tmp/exhibitor.id.chattr",
+      creates => '/tmp/exhibitor.id.chattr'
+    }
   }
 }
