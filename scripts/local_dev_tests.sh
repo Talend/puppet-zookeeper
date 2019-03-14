@@ -136,11 +136,20 @@ test $SYNTAX_ONLY -eq 1 && exit $RETURN
 fTitle "Preparing test vars"
 if [ -z "${PACKAGECLOUD_MASTER_TOKEN}" ]; then
   fWarning "PACKAGECLOUD_MASTER_TOKEN env var is not set"
-  /bin/echo -n "Please give me the PackageCloud Master Token: "
+  /bin/echo -n "Please give me the PackageCloud Master Token (repo talend/other): "
   read PACKAGECLOUD_MASTER_TOKEN
   export PACKAGECLOUD_MASTER_TOKEN
 else
   fMessage "PACKAGECLOUD_MASTER_TOKEN already set"
+fi
+
+if [ -z "${PACKAGECLOUD_TEST_TOKEN}" ]; then
+  fWarning "PACKAGECLOUD_TEST_TOKEN env var is not set"
+  /bin/echo -n "Please give me the PackageCloud Test Token (repo talend/tests): "
+  read PACKAGECLOUD_TEST_TOKEN
+  export PACKAGECLOUD_TEST_TOKEN
+else
+  fMessage "PACKAGECLOUD_TEST_TOKEN already set"
 fi
 
 if [ -z "${AWS_ACCESS_KEY_ID}" ]; then

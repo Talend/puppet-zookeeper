@@ -5,13 +5,28 @@ describe 'zookeeper' do
   context 'When Exhibitor installed' do
     describe 'Tomcat Server Info' do
       subject { command('/usr/bin/java -cp /opt/apache-tomcat/lib/catalina.jar org.apache.catalina.util.ServerInfo') }
-      its(:stdout) { should include 'Apache Tomcat/8.5.2' }
+      its(:stdout) { should include 'Apache Tomcat/8.5.38' }
     end
     describe 'Tomcat Home Directory' do
        subject { file('/home/tomcat') }
        it { should be_directory }
        it { should be_owned_by 'tomcat' }
     end
+    describe 'Exhibitor package' do
+      subject { command('/bin/rpm -q netflix-exhibitor-tomcat') }
+      its(:stdout) { should include 'netflix-exhibitor-tomcat-1.7.1-1.x86_64' }
+    end
+  end
+
+  describe 'Tomcat context.xml' do
+    subject { file('/opt/apache-tomcat/conf/context.xml') }
+    it { should be_file }
+    it { should be_owned_by 'tomcat' }
+    its(:content) { should include '<Resources cachingAllowed="true" cacheMaxSize="100000" />' }
+  end
+
+  describe command('/usr/bin/sleep 120') do
+    its(:exit_status) { should eq 0 }
   end
 
   context 'When Exhibitor configured' do
@@ -44,4 +59,11 @@ describe 'zookeeper' do
     end
   end
 
+  describe port(2181) do
+    it { should be_listening }
+  end
+
+  describe command('echo ruok | /bin/nc 127.0.0.1 2181') do
+    its(:stdout) { should eq 'imok' }
+  end
 end

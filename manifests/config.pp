@@ -40,5 +40,9 @@ class zookeeper::config {
       group   => $zookeeper::zookeeper_user_group,
       mode    => '0644',
       require => Class['::zookeeper::install']
+  } ->
+  exec { 'protect zookeeper id':
+    command => "/bin/chattr +a ${::zookeeper::zookeeper_cfg_dir}/myid && /usr/bin/touch /tmp/exhibitor.id.chattr",
+    creates => '/tmp/exhibitor.id.chattr'
   }
 }

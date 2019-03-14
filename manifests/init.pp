@@ -1,7 +1,7 @@
 # zookeeper module installation and configuration
 class zookeeper (
 
-  $tomcat_source_url    = 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.2/bin/apache-tomcat-8.5.2.tar.gz',
+  $tomcat_source_url    = 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.38/bin/apache-tomcat-8.5.38.tar.gz',
   $catalina_base        = '/opt/apache-tomcat',
   $service_ensure       = running,
   $service_enable       = true,
@@ -14,11 +14,18 @@ class zookeeper (
   $zookeeper_cfg_dir    = '/var/lib/zookeeper/data',
   $zookeeper_user       = 'tomcat',
   $zookeeper_user_group = 'tomcat',
+  $exhibitor_version    = 'installed'
 
 ) {
 
-  contain ::zookeeper::install
-  contain ::zookeeper::config
-  contain ::zookeeper::service
+  anchor { '::zookeeper::begin:': }
+  ->
+  class { '::zookeeper::install': }
+  ->
+  class { '::zookeeper::config': }
+  ->
+  class { '::zookeeper::service': }
+  ->
+  anchor { '::zookeeper::end:': }
 
 }
